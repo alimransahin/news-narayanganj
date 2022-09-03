@@ -35,7 +35,7 @@ const displayNews=allNews=>{
     const allNewsDiv= document.getElementById('all-news');
     allNewsDiv.innerHTML="";
     allNews.forEach(news=> {
-        console.log(news.rating.badge);
+        // console.log(news);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('col');
         newsDiv.innerHTML =
@@ -88,6 +88,28 @@ const loadDetailsNews=async (id)=>{
     // console.log(url);
     const res = await fetch(url);
     const data = await res.json();
-    // displayNews(data.data);
-    console.log(data.data[0]);
+    displayDetailsNews(data.data[0]);
+    // console.log(data.data[0]);
+}
+const displayDetailsNews=news=>{
+    console.log(news);
+    // const modalTitle = document.getElementById('staticBackdropLabel');
+    // modalTitle.innerText=news.title;
+    const modalContent = document.getElementById('modal-content');
+    modalContent.innerHTML=
+    `
+    <img src="${news.image_url}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title mb-3">${news.title}</h5>
+        <p class="card-text">${news.details}</p>
+        <div class="d-flex justify-content-between align-item-center">
+            <div>
+            <img style="max-width:50px" class="rounded-circle me-2" src="${news.author.img}">
+            <span class="my-auto">${news.author.name}</span>
+            </div>
+            <p class="card-text my-auto"><small class="text-muted">Last updated: ${news.author.published_date}</small></p>
+        </div>
+
+    </div>
+    `
 }
