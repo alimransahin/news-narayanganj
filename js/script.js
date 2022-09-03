@@ -35,7 +35,7 @@ const displayNews=allNews=>{
     const allNewsDiv= document.getElementById('all-news');
     allNewsDiv.innerHTML="";
     allNews.forEach(news=> {
-        // console.log(news);
+        console.log(news.rating.badge);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('col');
         newsDiv.innerHTML =
@@ -48,7 +48,7 @@ const displayNews=allNews=>{
             <div class="col ">
                 <div class="card-body">
                     <h5 class="card-title mb-3">${news.title}</h5>
-                    <p class="card-text text-muted mb-5">${news.details.slice(0,250)}...<span onclick="loadDetailsNews('${news._id}')" class="text-primary pointer"> see more</span></p>
+                    <p class="card-text text-muted mb-5">${news.details.slice(0, 250)}...<span onclick="loadDetailsNews('${news._id}')" class="text-primary pointer" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> see more</span></p>
                     <div class="d-flex flex-row justify-content-between">
                         <div class="author col-lg-4">
                             <div class="card mb-3 border-0">
@@ -66,8 +66,14 @@ const displayNews=allNews=>{
                             </div>
                         </div>
                     <p class="card-text text-muted fs-5"><i class="fa-solid fa-eye"></i> ${news.total_view}</p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <p class="card-text text-muted">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    </p>
+                    <span onclick="loadDetailsNews('${news._id}')" class="text-primary pointer fs-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-arrow-right"></i></span>
                     </div>
                 </div>
             </div>
