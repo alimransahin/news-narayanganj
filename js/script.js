@@ -1,19 +1,19 @@
 // menu load
 
-const loadMenu=()=>{
-    const url ='https://openapi.programming-hero.com/api/news/categories';
+const loadMenu = () => {
+    const url = 'https://openapi.programming-hero.com/api/news/categories';
     fetch(url)
-    .then(res=>res.json())
-    .then(data=>displayMenu(data.data.news_category))
-    .catch(error=>console.log(error));
+        .then(res => res.json())
+        .then(data => displayMenu(data.data.news_category))
+        .catch(error => console.log(error));
 }
-const displayMenu=menus=>{
+const displayMenu = menus => {
     const menuBar = document.getElementById('menu-bar');
     menus.forEach(menu => {
-        const li=document.createElement('li');
+        const li = document.createElement('li');
         li.classList.add("ki");
         li.classList.add('nav-item');
-        li.innerHTML =`
+        li.innerHTML = `
         <a onclick="loadNews('${menu.category_id}'),toggleLoader(true)" class="nav-link" href="#">${menu.category_name}</a>
         `;
         menuBar.appendChild(li);
@@ -25,8 +25,8 @@ loadMenu();
 
 
 // all news load
-const loadNews =async(id)=>{
-    const url=(`https://openapi.programming-hero.com/api/news/category/${id}`);
+const loadNews = async (id) => {
+    const url = (`https://openapi.programming-hero.com/api/news/category/${id}`);
     // console.log(url);
     try {
         const res = await fetch(url);
@@ -38,12 +38,12 @@ const loadNews =async(id)=>{
     }
     // console.log(data.data);
 }
-const displayNews=allNews=>{
+const displayNews = allNews => {
     allNews.sort((a, b) => {
         return a.total_view - b.total_view;
     });
-    const allNewsDiv= document.getElementById('all-news');
-    allNewsDiv.innerHTML="";
+    const allNewsDiv = document.getElementById('all-news');
+    allNewsDiv.innerHTML = "";
     const newsStatus = document.getElementById('news-status');
     if (allNews.length === 0) {
         newsStatus.innerText = "No news Found. Please try again another category";
@@ -55,7 +55,7 @@ const displayNews=allNews=>{
         newsStatus.classList.remove('d-none');
     }
     console.log(allNews);
-    allNews.forEach(news=> {
+    allNews.forEach(news => {
         // console.log(news);
         const newsDiv = document.createElement('div');
         newsDiv.classList.add('col');
@@ -75,18 +75,18 @@ const displayNews=allNews=>{
                             <div class="card mb-3 border-0">
                                 <div class="row g-0">
                                     <div class="col-md-3">
-                                        <img src="${news.author ? news.author.img:"image not found"}" class="img-fluid rounded-circle" style="max-width:50px" alt="...">
+                                        <img src="${news.author ? news.author.img : "image not found"}" class="img-fluid rounded-circle" style="max-width:50px" alt="...">
                                     </div>
                                     <div class="col-md-9 d-flex align-items-center">
                                         <div class="card-body py-0 my-auto">
                                             <h5 class="card-title m-0" >${(news.author.name != "") && (news.author.name != "system") && (news.author.name != null) ? news.author.name : "author not found"}</h5>
-                                            <p class="card-text"><small class="text-muted">${news.author ? news.author.published_date: "published time not found"}</small></p>
+                                            <p class="card-text"><small class="text-muted">${news.author ? news.author.published_date : "published time not found"}</small></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <p class="card-text text-muted fs-5"><i class="fa-solid fa-eye"></i> ${news.total_view != null ? news.total_view: '0'}</p>
+                    <p class="card-text text-muted fs-5"><i class="fa-solid fa-eye"></i> ${news.total_view != null ? news.total_view : '0'}</p>
                     <p class="card-text text-muted">
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
@@ -118,26 +118,26 @@ const toggleLoader = isLoading => {
     }
 }
 // modal load
-const loadDetailsNews=async (id)=>{
+const loadDetailsNews = async (id) => {
     const url = (`https://openapi.programming-hero.com/api/news/${id}`);
     // console.log(url);
-    try{
+    try {
         const res = await fetch(url);
         const data = await res.json();
         displayDetailsNews(data.data[0]);
     }
-    catch(error){
+    catch (error) {
         console.log(error);
     }
     // console.log(data.data[0]);
 }
-const displayDetailsNews=news=>{
+const displayDetailsNews = news => {
     // console.log(news);
     // const modalTitle = document.getElementById('staticBackdropLabel');
     // modalTitle.innerText=news.title;
     const modalContent = document.getElementById('modal-content');
-    modalContent.innerHTML=
-    `
+    modalContent.innerHTML =
+        `
     <img src="${news.image_url}" class="card-img-top" alt="...">
     <div class="card-body">
         <h5 class="card-title mb-3">${news.title}</h5>
