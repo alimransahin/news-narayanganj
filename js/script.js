@@ -54,12 +54,12 @@ const displayNews=allNews=>{
                             <div class="card mb-3 border-0">
                                 <div class="row g-0">
                                     <div class="col-md-3">
-                                        <img src="${news.author.img}" class="img-fluid rounded-circle" style="max-width:50px" alt="...">
+                                        <img src="${news.author ? news.author.img:"image not found"}" class="img-fluid rounded-circle" style="max-width:50px" alt="...">
                                     </div>
                                     <div class="col-md-9 d-flex align-items-center">
                                         <div class="card-body py-0 my-auto">
-                                            <h5 class="card-title m-0" >${news.author.name}</h5>
-                                            <p class="card-text"><small class="text-muted">${news.author.published_date}</small></p>
+                                            <h5 class="card-title m-0" >${news.author ? news.author.name:"author not found"}</h5>
+                                            <p class="card-text"><small class="text-muted">${news.author ? news.author.published_date: "published time not found"}</small></p>
                                         </div>
                                     </div>
                                 </div>
@@ -104,10 +104,10 @@ const displayDetailsNews=news=>{
         <p class="card-text">${news.details}</p>
         <div class="d-flex justify-content-between align-item-center">
             <div>
-            <img style="max-width:50px" class="rounded-circle me-2" src="${news.author.img}">
-            <span class="my-auto">${news.author.name}</span>
+            <img style="max-width:50px" class="rounded-circle me-2" src="${news.author ? news.author.img : "image not found"}">
+            <span class="my-auto">${news.author ? news.author.name : "author not found"}</span>
             </div>
-            <p class="card-text my-auto"><small class="text-muted">Last updated: ${news.author.published_date}</small></p>
+            <p class="card-text my-auto"><small class="text-muted">Last updated: ${news.author ? news.author.published_date : "published time not found"}</small></p>
         </div>
 
     </div>
