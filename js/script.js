@@ -63,7 +63,7 @@ const displayNews = allNews => {
             `
     <div class="card mb-3">
         <div class="row g-0">
-            <div class="col-md-auto my-auto">
+            <div class="col-auto m-auto">
                 <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
             </div>
             <div class="col ">
