@@ -28,9 +28,14 @@ loadMenu();
 const loadNews =async(id)=>{
     const url=(`https://openapi.programming-hero.com/api/news/category/${id}`);
     // console.log(url);
-    const res=await fetch(url);
-    const data=await res.json();
-    displayNews(data.data);
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        displayNews(data.data);
+    }
+    catch (error) {
+        console.log(error);
+    }
     // console.log(data.data);
 }
 const displayNews=allNews=>{
@@ -111,11 +116,11 @@ const toggleLoader = isLoading => {
 // modal load
 const loadDetailsNews=async (id)=>{
     const url = (`https://openapi.programming-hero.com/api/news/${id}`);
-    console.log(url);
+    // console.log(url);
     try{
         const res = await fetch(url);
         const data = await res.json();
-        displayDetailsNews(data[0]);
+        displayDetailsNews(data.data[0]);
     }
     catch(error){
         console.log(error);
@@ -123,7 +128,7 @@ const loadDetailsNews=async (id)=>{
     // console.log(data.data[0]);
 }
 const displayDetailsNews=news=>{
-    console.log(news);
+    // console.log(news);
     // const modalTitle = document.getElementById('staticBackdropLabel');
     // modalTitle.innerText=news.title;
     const modalContent = document.getElementById('modal-content');
