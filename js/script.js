@@ -39,6 +39,9 @@ const loadNews =async(id)=>{
     // console.log(data.data);
 }
 const displayNews=allNews=>{
+    allNews.sort((a, b) => {
+        return a.total_view - b.total_view;
+    });
     const allNewsDiv= document.getElementById('all-news');
     allNewsDiv.innerHTML="";
     const newsStatus = document.getElementById('news-status');
@@ -51,6 +54,7 @@ const displayNews=allNews=>{
         newsStatus.innerText = `${allNews.length} news Found.`;
         newsStatus.classList.remove('d-none');
     }
+    console.log(allNews);
     allNews.forEach(news=> {
         // console.log(news);
         const newsDiv = document.createElement('div');
